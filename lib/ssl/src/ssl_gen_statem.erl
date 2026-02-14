@@ -2190,13 +2190,13 @@ keylog_1_3(ClientRandom, Prf, Role, Sender, Info) ->
         client ->
             {server_traffic_secret, SecretRead, NRead} = lists:keyfind(server_traffic_secret, 1, Info),
             hs_logs(NRead, ClientRandom, Prf, EarlySecret, Info) ++
-                ssl_logger:keylog_traffic_1_3(Role, ClientRandom, Prf, SecretRead, NRead) ++
-                ssl_logger:keylog_traffic_1_3(server, ClientRandom, Prf, SecretWrite, NWrite);
+                ssl_logger:keylog_traffic_1_3(Role, ClientRandom, Prf, SecretWrite, NWrite) ++
+                ssl_logger:keylog_traffic_1_3(server, ClientRandom, Prf, SecretRead, NRead);
         server ->
             {client_traffic_secret, SecretRead, NRead} = lists:keyfind(client_traffic_secret, 1, Info),
             hs_logs(NRead, ClientRandom, Prf, EarlySecret, Info) ++
-                ssl_logger:keylog_traffic_1_3(client, ClientRandom, Prf, SecretWrite, NWrite) ++
-                ssl_logger:keylog_traffic_1_3(Role, ClientRandom, Prf, SecretRead, NRead)
+                ssl_logger:keylog_traffic_1_3(client, ClientRandom, Prf, SecretRead, NRead) ++
+                ssl_logger:keylog_traffic_1_3(Role, ClientRandom, Prf, SecretWrite, NWrite)
     end.
 
 hs_logs(0, ClientRandom, Prf, EarlySecret, Info) ->
