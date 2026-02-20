@@ -39,8 +39,6 @@ on:
   workflow_dispatch:
   push:
   pull_request:
-  schedule:
-      - cron: 0 1 * * *
 
 ## We cancel any multiple runs from PRs, while runs from tags/branches are allowed
 concurrency:
